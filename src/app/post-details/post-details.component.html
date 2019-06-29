@@ -1,7 +1,11 @@
 Post Details:
+<br/>
+	<button class="pull-right" (click)="addRow=true;">Add Row</button>
+  <br/>
+    <br/>
+      <br/>
 <div class="data-table">
-
-	<table>
+<table>
 		<thead>
 			<tr>
 				<th>Post Id</th>
@@ -13,28 +17,44 @@ Post Details:
 			</tr>
 		</thead>
 		<tbody>
-			<tr *ngFor="let item of postDetailsResponse">
-				<td>
-					<span *ngIf="!editable">{{item.postId}}</span>
-          <input *ngIf="editable" type="number" [(ngModel)]="item.postIds" placeholder="enter post id">
-  `           </td>
-				<td> 
-             <span *ngIf="!editable">{{item.id}}</span>
-           <input *ngIf="editable" type="number" [(ngModel)]="item.postId" placeholder="enter  id"> </td>
-				<td> 
-             <span *ngIf="!editable">{{item.name}}</span>
-           <input *ngIf="editable" type="text" [(ngModel)]="item.postName" placeholder="enter post name">
-        </td>
-				<td> {{item.email}} </td>
-				<td> {{item.body}} </td>
+      	<tr *ngIf="addRow">
+			 
+       <td><input type="number" id="newPostId" [(ngModel)]="newAttribute.postId" name="newPostId"  placeholder="Enter postId"> </td>
+       <td><input type="number" id="newId" [(ngModel)]="newAttribute.id" name="newId"  placeholder="Enter ID"> </td>
+       <td><input type="text" id="newName" [(ngModel)]="newAttribute.postName" name="newName"  placeholder="Enter Name"> </td>
+				<td><input type="email" id="newEmail" [(ngModel)]="newAttribute.email" name="newEmail"  placeholder="Enter Email"> </td>
+        	<td><input type="text" id="newBody" [(ngModel)]="newAttribute.body" name="newBody"  placeholder="Body"> </td>
 				<td>
 
-				<button  *ngIf="!editable"  (click)="updatePost(item);">Update</button>
-        <button *ngIf="editable" (click)="save(item);">save</button>
-        <button (click)="createPost(item);">Create</button>
-        <button   *ngIf="editable"  (click)="cancelPost(item);">Cancel</button>
+				<button  (click)="createPost();addRow=false;" >Add</button>
+    
+        <button   (click)="addRow=false;">Cancel</button>
         </td>
     </tr>
+			<tr *ngFor="let item of postDetailsResponse">
+				<td>
+					<span>{{item.postId}}</span>
+         
+  `           </td>
+				<td> 
+             <span>{{item.id}}</span>
+           
+				<td> 
+             <span *ngIf="!item.editable">{{item.name}}</span>
+           <input *ngIf="item.editable" type="text" [(ngModel)]="item.postName" placeholder="Enter post name">
+        </td>
+				<td> {{item.email}} </td>
+				<td> <span *ngIf="!item.editable"> {{item.body}}</span>
+         <input *ngIf="item.editable" type="text" [(ngModel)]="item.postBody" placeholder="Enter body"> </td>
+				<td>
+
+				<button  *ngIf="!item.editable"  (click)="updatePost(item);">Update</button>
+        <button *ngIf="item.editable" (click)="save(item);">Save</button>
+      
+        <button   *ngIf="item.editable"  (click)="cancelPost(item);">Cancel</button>
+        </td>
+    </tr>
+    		
   </tbody>
 </table>
 </div>

@@ -10,7 +10,8 @@ export class PostDetailsComponent implements OnInit {
   editable: boolean;
   constructor(public _ServerResponseService: ServerResponseService) { }
   postDetailsResponse = [];
-
+  response: any;
+  errorMessage: any;
   ngOnInit() {
     this._ServerResponseService.getPostDetails()
       .subscribe(
@@ -24,19 +25,33 @@ export class PostDetailsComponent implements OnInit {
 
   updatePost(x) {
     console.log('id', x);
-    x.postIds = x.postId;
-// https://jsonplaceholder.typicode.com/posts/4
-    this.editable = true;
+    x.postName = x.name;
+    x.postBody = x.body;
+    // https://jsonplaceholder.typicode.com/posts/4
+    x.editable = true;
+    this._ServerResponseService
+      .makePutRequest()
+      .subscribe(
+        response => this.response = response,
+        error => this.errorMessage = <any>error
+      );
   }
   save(x) {
-    x.postId = x.postIds;
-
-    this.editable = false;
-  }
-  createPost(x) {
-    console.log('id', x);
+    x.name = x.postName;
+    x.body = x.postBody;
+    x.editable = false;
   }
   cancelPost(x) {
-    this.editable = false;
+    x.editable = false;
   }
-}
+
+   newAttribute: any = {};
+
+    createPost() {
+        this.postDetailsResponse.unshift(this.newAttribute)
+        this.newAttribute = {};
+        console.log('newdata',this.postDetailsResponse);
+    }
+
+   
+} 

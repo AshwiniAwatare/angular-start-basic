@@ -13,4 +13,23 @@ export class ServerResponseService {
   getPostDetails(): Observable<any> {
     return this.http.get(this.postDetailsUrl);
   }
+   makePutRequest(): Observable<any> {
+     console.log('makePutRequest');
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    
+    let bodyObj = {
+      userId: 1,
+      id: 1,
+      title: "new title",
+      body: "new body"
+    };
+    
+    return this.http
+      .put('https://jsonplaceholder.typicode.com/posts/1', JSON.stringify(bodyObj) ) ;
+  }
+   extractData(res: Response) {
+    let body = res.json();
+    return body;
+  }
 }
