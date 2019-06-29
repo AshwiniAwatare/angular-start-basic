@@ -18,7 +18,7 @@ export class PostsComponent implements OnInit {
           this.dataListResponse =
           data
       )
-s  }
+}
 
   channelForm: boolean = false;
   channelListing: boolean = false;

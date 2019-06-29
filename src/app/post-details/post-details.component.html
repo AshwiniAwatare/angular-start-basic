@@ -14,16 +14,25 @@ Post Details:
 		</thead>
 		<tbody>
 			<tr *ngFor="let item of postDetailsResponse">
-				<td>{{item.postId}} </td>
-				<td> {{item.id}} </td>
-				<td> {{item.name}}</td>
+				<td>
+					<span *ngIf="!editable">{{item.postId}}</span>
+          <input *ngIf="editable" type="number" [(ngModel)]="item.postIds" placeholder="enter post id">
+  `           </td>
+				<td> 
+             <span *ngIf="!editable">{{item.id}}</span>
+           <input *ngIf="editable" type="number" [(ngModel)]="item.postId" placeholder="enter  id"> </td>
+				<td> 
+             <span *ngIf="!editable">{{item.name}}</span>
+           <input *ngIf="editable" type="text" [(ngModel)]="item.postName" placeholder="enter post name">
+        </td>
 				<td> {{item.email}} </td>
-
 				<td> {{item.body}} </td>
 				<td>
-					<button (click)="updatePost();">Update</button>
-        <button (click)="createPost();">Create</button>
-        <button (click)="cancelPost();">Cancel</button>
+
+				<button  *ngIf="!editable"  (click)="updatePost(item);">Update</button>
+        <button *ngIf="editable" (click)="save(item);">save</button>
+        <button (click)="createPost(item);">Create</button>
+        <button   *ngIf="editable"  (click)="cancelPost(item);">Cancel</button>
         </td>
     </tr>
   </tbody>

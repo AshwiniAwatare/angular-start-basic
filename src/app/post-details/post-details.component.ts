@@ -7,6 +7,7 @@ import { ServerResponseService } from '../Services/server-response.service';
   styleUrls: ['./post-details.component.css']
 })
 export class PostDetailsComponent implements OnInit {
+  editable: boolean;
   constructor(public _ServerResponseService: ServerResponseService) { }
   postDetailsResponse = [];
 
@@ -17,19 +18,25 @@ export class PostDetailsComponent implements OnInit {
           this.postDetailsResponse =
           data
       )
-   
+
   }
 
 
+  updatePost(x) {
+    console.log('id', x);
+    x.postIds = x.postId;
+// https://jsonplaceholder.typicode.com/posts/4
+    this.editable = true;
+  }
+  save(x) {
+    x.postId = x.postIds;
 
-
-updatePost(){
-
-}
-createPost(){
-
-}
-cancelPost(){
-
-}
+    this.editable = false;
+  }
+  createPost(x) {
+    console.log('id', x);
+  }
+  cancelPost(x) {
+    this.editable = false;
+  }
 }
