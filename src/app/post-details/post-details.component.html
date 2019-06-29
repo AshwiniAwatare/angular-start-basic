@@ -1,4 +1,8 @@
-Post Details:
+      <h1>Post Section</h1>
+
+{{postDetailsResponse.body}}
+
+      <h1>Comments Section</h1>
 <br/>
 	<button class="pull-right" (click)="addRow=true;">Add Row</button>
   <br/>
@@ -31,7 +35,9 @@ Post Details:
         <button   (click)="addRow=false;">Cancel</button>
         </td>
     </tr>
-			<tr *ngFor="let item of postDetailsResponse">
+    <!-- comments List -->
+    
+			<tr *ngFor="let item of commentsDetailsResponse">
 				<td>
 					<span>{{item.postId}}</span>
          

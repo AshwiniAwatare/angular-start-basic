@@ -1,4 +1,6 @@
+<p> Show a list of posts. APIs to use: <a> https://jsonplaceholder.typicode.com/posts</a>
 
+</p>
 <div class="data-table">
 
 	<table>
@@ -28,7 +30,7 @@
     {{item.body}}
       </td>
       <td>
-        <button routerLink="postDetails" (click)="viewDetails();">View Details</button>
+        <button [routerLink]="['postDetails',item.id]">View Details</button>
         </td>
     </tr>
   </tbody>

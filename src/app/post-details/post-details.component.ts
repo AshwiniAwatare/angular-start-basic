@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ServerResponseService } from '../Services/server-response.service';
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-post-details',
   templateUrl: './post-details.component.html',
@@ -8,17 +10,28 @@ import { ServerResponseService } from '../Services/server-response.service';
 })
 export class PostDetailsComponent implements OnInit {
   editable: boolean;
-  constructor(public _ServerResponseService: ServerResponseService) { }
+  constructor(public _ServerResponseService: ServerResponseService, private route: ActivatedRoute) { }
+  commentsDetailsResponse = [];
   postDetailsResponse = [];
+
   response: any;
   errorMessage: any;
   ngOnInit() {
-    this._ServerResponseService.getPostDetails()
+       const id = this.route.snapshot.paramMap.get('id');
+console.log(id)
+    // this._ServerResponseService.makeRequest(id);
+
+    this._ServerResponseService.makeRequest(id)
       .subscribe(
         data =>
-          this.postDetailsResponse =
-          data
+          this.commentsDetailsResponse = data
       )
+       this._ServerResponseService.getPostDetails(id)
+      .subscribe(
+        data =>
+          this.postDetailsResponse = data
+      )
+      console.log(this.commentsDetailsResponse);
 
   }
 
@@ -30,7 +43,7 @@ export class PostDetailsComponent implements OnInit {
     // https://jsonplaceholder.typicode.com/posts/4
     x.editable = true;
     this._ServerResponseService
-      .makePutRequest()
+      .makePutRequest(x)
       .subscribe(
         response => this.response = response,
         error => this.errorMessage = <any>error

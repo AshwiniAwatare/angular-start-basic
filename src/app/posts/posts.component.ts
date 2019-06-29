@@ -36,8 +36,5 @@ export class PostsComponent implements OnInit {
     this.DeletedChannelNo = outputHere;
   }
 
-  viewDetails() {
-    console.log('view details');
-  }
 
 }

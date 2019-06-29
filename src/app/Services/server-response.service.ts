@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient ,HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
 @Injectable()
 export class ServerResponseService {
@@ -10,17 +10,22 @@ export class ServerResponseService {
   getDataList(): Observable<any> {
     return this.http.get(this.ApiUrl);
   }
-  getPostDetails(): Observable<any> {
-    return this.http.get(this.postDetailsUrl);
+  getPostDetails(postId): Observable<any> {
+    return this.http.get('https://jsonplaceholder.typicode.com/posts/'+postId);
   }
-   makePutRequest(): Observable<any> {
+   makeRequest(postId): Observable<any> {
+    return this.http.get('https://jsonplaceholder.typicode.com/posts/'+postId+'/comments');
+  }
+  
+  
+   makePutRequest(x): Observable<any> {
      console.log('makePutRequest');
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     
     let bodyObj = {
-      userId: 1,
-      id: 1,
+      userId: x.userId,
+      id: x.id,
       title: "new title",
       body: "new body"
     };
