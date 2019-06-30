@@ -35,9 +35,7 @@ export class PostDetailsComponent implements OnInit {
 
 
   updatePost(x) {
-    console.log('id', x);
-    x.postName = x.name;
-    x.postBody = x.body;
+    console.log('post', x);
     // https://jsonplaceholder.typicode.com/posts/4
     x.editable = true;
     this._ServerResponseService.makePutRequest(x)
@@ -47,9 +45,14 @@ export class PostDetailsComponent implements OnInit {
       );
   }
   save(x) {
-    x.name = x.postName;
-    x.body = x.postBody;
+    x.title = x.title;
+    x.body = x.body;
     x.editable = false;
+     this._ServerResponseService.makePutRequest(x)
+      .subscribe(
+        response => this.response = response,
+        error => this.errorMessage = <any>error
+      );
   }
   cancelPost(x) {
     x.editable = false;

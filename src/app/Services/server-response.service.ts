@@ -23,12 +23,11 @@ export class ServerResponseService {
     let bodyObj = {
       userId: x.userId,
       id: x.id,
-      title: "new title",
-      body: "new body"
+      title: x.title,
+      body: x.body
     };
     
-    return this.http
-      .put('https://jsonplaceholder.typicode.com/posts/1', JSON.stringify(bodyObj) ) ;
+    return this.http.put('https://jsonplaceholder.typicode.com/posts/1', JSON.stringify(bodyObj) ) ;
   }
   createPostRequest(bodyObj): Observable<any> {
   
