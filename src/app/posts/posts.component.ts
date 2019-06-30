@@ -20,21 +20,4 @@ export class PostsComponent implements OnInit {
       )
 }
 
-  channelForm: boolean = false;
-  channelListing: boolean = false;
-
-  private newFunction() {
-    return this.dataListResponse;
-  }
-
-  saveChannel(channelName, channelNumber) {
-    // this.channelList.unshift({ 'name': channelName, 'number': channelNumber })
-  }
-  DeletedChannelNo: number;
-
-  goTOParentComponentListenMyVOice(outputHere) {
-    this.DeletedChannelNo = outputHere;
-  }
-
-
 }

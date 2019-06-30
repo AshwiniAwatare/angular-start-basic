@@ -1,11 +1,24 @@
 /* Add application styles & imports to this file! */
 .data-table table{ 
  border-collapse: collapse;
+ width:100%;
 
 }
-.data-table td, .data-table th{
-  padding:5px;
+.data-table table td, .data-table table th{
+  padding: 10px;
+  text-align: left;
    border:1px solid #dfdfdf;
+}
+
+.data-table table  tr:nth-child(even) {
+  background-color: #eee;
+}
+.data-table table  tr:nth-child(odd) {
+ background-color: #fff;
+}
+.data-table table  th {
+  background-color: black;
+  color: white;
 }
 button {
     border: 1px solid #dfdfdf;
@@ -20,9 +33,10 @@ button:hover
   background: #f2f2f2;
 }
 .data-table {
-    max-height: 500px;
+    max-height: 450px;
     overflow: auto;
     border: 1px solid #dfdfdf;
+    border-top:none;
     clear: both;
 }
 input{

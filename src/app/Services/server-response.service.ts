@@ -4,11 +4,9 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class ServerResponseService {
   constructor(private http: HttpClient) { }
-  public ApiUrl: string = 'https://jsonplaceholder.typicode.com/posts'
-  public postDetailsUrl: string = 'https://jsonplaceholder.typicode.com/posts/1/comments'
-
-  getDataList(): Observable<any> {
-    return this.http.get(this.ApiUrl);
+ 
+   getDataList(): Observable<any> {
+    return this.http.get('https://jsonplaceholder.typicode.com/posts');
   }
   getPostDetails(postId): Observable<any> {
     return this.http.get('https://jsonplaceholder.typicode.com/posts/'+postId);
@@ -16,8 +14,7 @@ export class ServerResponseService {
    makeRequest(postId): Observable<any> {
     return this.http.get('https://jsonplaceholder.typicode.com/posts/'+postId+'/comments');
   }
-  
-  
+   
    makePutRequest(x): Observable<any> {
      console.log('makePutRequest');
     let headers = new Headers();
@@ -32,6 +29,15 @@ export class ServerResponseService {
     
     return this.http
       .put('https://jsonplaceholder.typicode.com/posts/1', JSON.stringify(bodyObj) ) ;
+  }
+  createPostRequest(bodyObj): Observable<any> {
+  
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+     
+    
+    return this.http
+      .post('https://jsonplaceholder.typicode.com/posts', JSON.stringify(bodyObj) ) ;
   }
    extractData(res: Response) {
     let body = res.json();

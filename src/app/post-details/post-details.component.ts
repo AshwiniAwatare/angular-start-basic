@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PostDetailsComponent implements OnInit {
   editable: boolean;
+  addRow:boolean;
   constructor(public _ServerResponseService: ServerResponseService, private route: ActivatedRoute) { }
   commentsDetailsResponse = [];
   postDetailsResponse = [];
@@ -18,10 +19,8 @@ export class PostDetailsComponent implements OnInit {
   errorMessage: any;
   ngOnInit() {
        const id = this.route.snapshot.paramMap.get('id');
-console.log(id)
-    // this._ServerResponseService.makeRequest(id);
-
-    this._ServerResponseService.makeRequest(id)
+       console.log(id)
+       this._ServerResponseService.makeRequest(id)
       .subscribe(
         data =>
           this.commentsDetailsResponse = data
@@ -32,7 +31,6 @@ console.log(id)
           this.postDetailsResponse = data
       )
       console.log(this.commentsDetailsResponse);
-
   }
 
 
@@ -42,8 +40,7 @@ console.log(id)
     x.postBody = x.body;
     // https://jsonplaceholder.typicode.com/posts/4
     x.editable = true;
-    this._ServerResponseService
-      .makePutRequest(x)
+    this._ServerResponseService.makePutRequest(x)
       .subscribe(
         response => this.response = response,
         error => this.errorMessage = <any>error
@@ -60,11 +57,13 @@ console.log(id)
 
    newAttribute: any = {};
 
-    createPost() {
-        this.postDetailsResponse.unshift(this.newAttribute)
-        this.newAttribute = {};
-        console.log('newdata',this.postDetailsResponse);
+    createPost(x) {
+      console.log('x', x);
+      this._ServerResponseService.createPostRequest(x)
+      .subscribe(
+        response => this.response = response,
+        error => this.errorMessage = <any>error
+      );
     }
 
-   
 } 

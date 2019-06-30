@@ -1,37 +1,25 @@
-<p> Show a list of posts. APIs to use: <a> https://jsonplaceholder.typicode.com/posts</a>
+<p> Show a list of posts. APIs to use: <a href="https://jsonplaceholder.typicode.com/posts"> https://jsonplaceholder.typicode.com/posts</a>
 
 </p>
+<h3>List of posts</h3>
 <div class="data-table">
-
 	<table>
 		<thead>
 			<tr>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
+				<th>UserId</th>
+				<th>Id</th>
+				<th>Title</th>
+				<th>Body</th>
 				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr *ngFor="let item of dataListResponse">
-				<td>
-
-					<span>{{item.userId}} </span>
-         
-      </td>
-       <td>
-    {{item.id}}
-      </td>
-       <td>
-    {{item.title}}
-      </td>
-       <td>
-    {{item.body}}
-      </td>
-      <td>
-        <button [routerLink]="['postDetails',item.id]">View Details</button>
-        </td>
+				<td>{{item.userId}}</td>
+				<td>{{item.id}}</td>
+				<td>{{item.title}} </td>
+				<td>{{item.body}}</td>
+				<td><button [routerLink]="['postDetails',item.id]">View Details</button></td>
     </tr>
   </tbody>
 </table>
